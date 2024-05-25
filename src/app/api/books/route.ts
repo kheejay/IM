@@ -16,7 +16,7 @@ export async function GET() {
                 Reviews: true, // Include book ratings in the selection
             },
             orderBy: {
-                ISBN: "desc",
+                ISBN: "asc",
             },
         });
 
