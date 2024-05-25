@@ -4,7 +4,5 @@ export type FormInputPost = {
     bookAuthor: string;  
     yearOfPublication: number;
     publisher: string;
-    imageUrlS: string;
     imageUrlM: string;
-    imageUrlL: string;
 }

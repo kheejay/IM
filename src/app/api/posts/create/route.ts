@@ -13,9 +13,7 @@ export async function POST(request: Request) {
                 bookAuthor: body.bookAuthor,  
                 yearOfPublication: Number(body.yearOfPublication),
                 publisher: body.publisher,
-                imageUrlL: body.imageUrlL,
                 imageUrlM: body.imageUrlM,
-                imageUrlS: body.imageUrlS,
             },
         });
         return NextResponse.json(post, { status: 200 });

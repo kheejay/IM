@@ -16,9 +16,8 @@ export async function GET() {
                 Reviews: true, // Include book ratings in the selection
             },
             orderBy: {
-                bookTitle: "asc",
+                ISBN: "desc",
             },
-            take: 1000
         });
 
         // Calculate average rating for each book
