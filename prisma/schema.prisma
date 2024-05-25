@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @unique
+  email        String       @unique
+  firstName    String
+  lastName     String
+  profileImage String?
+  role         Role         @default(User)
+  colorScheme  String       @default("theme-red")
+  createdAt    DateTime     @default(now())
+  updateAt     DateTime     @updatedAt
+  Book         Book[]
+  Reviews      Reviews[]
+}
+
+model Book {
+  ISBN              String       @id 
+  bookTitle         String
+  bookAuthor        String
+  yearOfPublication Int
+  publisher         String
+  imageUrlS         String?
+  imageUrlM         String
+  imageUrlL         String?
+  userId            String?
+  library           Int         @default(1)
+  User              User?        @relation(fields: [userId], references: [id])
+  Reviews       Reviews[]
+}
+
+enum Role {
+  User
+  Librarian
+}
+
+model Reviews {
+  id         String @id @default(cuid())
+  bookRating Int @default(0)
+  email String  @default("anonymous")
+  ISBN       String
+  reviewText String?
+
+  user User @relation(fields: [email], references: [email])
+  Book Book @relation(fields: [ISBN], references: [ISBN],onDelete: Cascade)
+}
