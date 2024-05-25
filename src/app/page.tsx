@@ -11,6 +11,7 @@ interface Book {
   yearOfPublication: number;
   publisher: string;
   imageUrlM: string;
+  library: string;
 }
 
 async function getBooks() {
@@ -27,7 +28,7 @@ export default function Home() {
     async function fetchBooks() {
       const data = await getBooks();
       setBooks(data);
-    }
+    }//ads
     fetchBooks();
   }, []); // Empty dependency array to fetch books only once
 
@@ -37,8 +38,6 @@ export default function Home() {
         book.bookTitle.toLowerCase().includes(query.toLowerCase()) ||
         book.bookAuthor.toLowerCase().includes(query.toLowerCase()) ||
         book.yearOfPublication.toString().includes(query.toLowerCase())
-
-        
       )
     );
   }
